@@ -1,0 +1,36 @@
+# A staging FOUNDATION for the fictional engine "foo-engine" (astra-plugins-ops
+# dev/game-integrations-plan-merged.md §3.2 lane C, "Done when"). Based on
+# astra-games-catalogue's fixtures/staging/foo-engine.toml, with this repository's own
+# identity in place of the fixture's placeholder account.
+schema = 1
+
+[integration]                      # metadata: shown to the user, never acted on
+id = "astra-test-author.foo-engine"
+name = "Foo Engine Foundation (staging test)"
+version = "0.1.0"
+authors = ["astra-test-author"]
+license = "MIT"
+repo = "https://github.com/astra-test-author/astra-foundation-foo-engine"
+
+[integration.engine]
+schema = "astra.engine/1"
+engine = { codes = { foo-engine = "Foo Engine" } }
+
+[[integration.engine.rule]]
+tier = "strong"
+programs = { ext = ["exe"], at = "{project}", first = 8 }
+require = [ { listed = "foo_runtime.dll", kind = "file" } ]
+code = "foo-engine"
+confidence = "high"
+binary = "windows"
+evidence = "{project}"
+
+[target]
+engine = "foo-engine"
+exe = "*"
+platforms = ["windows-x64"]
+anti_cheat = "none"
+
+[[files]]
+from = "**"
+to = "${profile}/"
